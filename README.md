@@ -1,4 +1,4 @@
-div align="center">
+<div align="center">
   <br>
   <img src="https://github.com/awiones/Cat-Chat-Application/blob/main/img/logo-icon.png" alt="catchat" width="400px;">
 </div>
