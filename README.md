@@ -12,8 +12,6 @@
 
 Welcome to CatChat! This website is designed to provide a fun and interactive chatting experience with a virtual cat manager. Below you'll find details about the features and functionalities of the website.
 
-![CatChat Logo](img/logo.png)
-
 ## Features
 
 ### 1. Chat with Cat Manager
