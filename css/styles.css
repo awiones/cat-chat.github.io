@@ -1,0 +1,694 @@
+/* made with <3 by awiones */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Enable smooth scrolling */
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #007BFF; /* Blue color for the navbar */
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+/* Logo styling */
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* Remove underline from link */
+}
+
+.logo-img {
+    height: 40px; /* Adjust the logo size as needed */
+    width: auto;
+}
+
+/* Navigation links styling */
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px; /* Space between navigation items */
+}
+
+.nav-links li {
+    margin: 0; /* Remove margin from list items */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.3s ease, color 0.3s ease;
+    display: block; /* Ensure the link spans the full height of the navbar */
+    padding: 10px; /* Add padding to make the clickable area larger */
+}
+
+/* Hover effect */
+.nav-links a:hover {
+    color: #ddd; /* Lighten color on hover */
+    transform: scale(1.1); /* Slightly enlarge the text */
+}
+
+/* Click animation effect */
+.nav-links a:active {
+    transform: scale(0.9); /* Squeeze the text when clicked */
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Hide links on small screens */
+        flex-direction: column;
+        width: 100%;
+        background-color: #007BFF;
+        position: absolute;
+        top: 60px; /* Adjust based on navbar height */
+        left: 0;
+        z-index: 1000;
+    }
+
+    .nav-links.show {
+        display: flex; /* Show links when menu is toggled */
+    }
+
+    .navbar {
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    .logo-img {
+        height: 30px; /* Adjust logo size for small screens */
+    }
+
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px; /* Thin scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #f0f2f5; /* Background color of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #0044cc; /* Blue color for the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the scrollbar thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #0033aa; /* Darker blue when hovered */
+}
+
+/* Adjust body content to avoid overlap with navbar */
+body {
+    padding-top: 60px; /* Adjust this if needed based on the navbar height */
+}
+
+.catchat-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0f8ff;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.catchat-text {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.catchat-logo {
+    flex: 1;
+    text-align: right;
+}
+
+.catchat-logo img {
+    max-width: 100%; /* Ensures the logo scales with the container */
+    height: auto;    /* Keeps aspect ratio */
+    border: 2px solid #0044cc; /* Blue border around logo */
+    border-radius: 8px; /* Rounded corners for logo */
+}
+
+.catchat-text h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.catchat-text p {
+    font-size: 1em;
+    line-height: 1.6;
+    text-align: justify; /* Justify text */
+    margin-bottom: 10px;
+}
+
+body, .text-manager, .info-box, h1, p, ul, li {
+    user-select: none; /* Disable text selection */
+}
+
+.text-manager {
+    background-color: #f5f5f5; /* Light grey background */
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.text-manager .info-box {
+    text-align: center;
+}
+
+.text-manager h1 {
+    color: #0044cc; /* Blue color for heading */
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.text-manager p {
+    color: #333;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.text-manager ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.text-manager li {
+    background: #e0f7ff; /* Light blue background */
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.text-manager li strong {
+    color: #007bff; /* Blue color for emphasis */
+}
+
+.text-manager a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.text-manager a:hover {
+    text-decoration: underline;
+}
+
+
+.chat-icon {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: #007bff;
+    color: white;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    outline: none;
+    user-select: none;
+    z-index: 1000; 
+}
+
+.chat-icon:hover {
+    transform: scale(1.1);
+}
+
+.chat-container {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    display: none; 
+    z-index: 1000;
+}
+
+/* Show Chat Box */
+.chat-container.visible {
+    display: block;
+}
+
+/* Chat Box */
+.chat-box {
+    position: relative;
+    width: 300px;
+    max-width: 100%;
+    height: 400px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    transform: translateY(100%);
+    transition: transform 0.5s ease;
+}
+
+.chat-container.visible .chat-box {
+    transform: translateY(0);
+}
+
+/* Chat Header */
+.chat-header {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none; /* Make text unselectable */
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* Make the icon circular */
+    margin-right: 10px;
+}
+
+.cat-manager {
+    cursor: pointer; /* Make it look clickable */
+}
+
+
+/* Chat Log */
+.chat-log {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #f9f9f9;
+    user-select: none; /* Standard syntax */
+    -webkit-user-select: none; /* Chrome, Safari, and Opera */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+/* Messages */
+.message {
+    padding: 5px 10px;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+    transition: background-color 0.3s, transform 0.3s;
+    text-align: left; /* Align text to the left */
+    word-wrap: break-word; /* Break long words */
+    overflow-wrap: break-word; /* Handle long words that may overflow */
+    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+}
+
+.message.user {
+    background: #007bff;
+    color: #fff;
+    align-self: flex-end;
+    text-align: left;
+}
+
+.message.cat {
+    background: #e0e0e0;
+    color: #333;
+    align-self: flex-start;
+}
+
+.message.clicked {
+    background-color: #e0e0e0; /* Light gray background on click */
+    transform: scale(1.05); /* Slightly enlarge the message */
+}
+
+/* Typing animation */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cat-typing {
+    font-style: italic;
+}
+
+.typing-dots {
+    display: flex;
+    gap: 4px;
+}
+
+.typing-dots span {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #999;
+    border-radius: 50%;
+    animation: typingDots 1.5s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes typingDots {
+    0%, 20%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Custom scrollbar styles */
+.chat-log::-webkit-scrollbar {
+    width: 8px; /* Thinner scrollbar */
+}
+
+.chat-log::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Track background */
+}
+
+.chat-log::-webkit-scrollbar-thumb {
+    background: #007bff; /* Blue color */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.chat-log::-webkit-scrollbar-thumb:hover {
+    background: #0056b3; /* Darker blue on hover */
+}
+
+/* Input Container */
+.input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+}
+
+/* Styled textarea */
+textarea {
+    flex: 1;
+    padding: 11px 12px 0.5px; /* Adjust padding */
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Spherical corners */
+    background-color: #fff;
+    font-size: 14px;
+    margin-right: 15px;
+    resize: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    max-width: calc(100% - 50px); /* Adjust width */
+    min-height: 5px; /* Adjust height */
+}
+
+textarea:focus {
+    outline: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    transform: scale(0.95); /* Scale down the button */
+}
+
+main.about-me {
+    padding: 20px 20px 20px; /* Add padding at top to avoid overlap with navbar */
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-box {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 60px; /* Increased padding */
+    max-width: 1200px; /* Increased max-width */
+    width: 90%;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Increased shadow for more depth */
+    margin: 20px;
+    overflow: hidden;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar .nav-links a {
+        margin-bottom: 10px;
+    }
+
+    .info-box {
+        padding: 20px;
+    }
+}
+
+
+.about-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px; /* Increased margin */
+}
+
+.about-image {
+    border-radius: 50%;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    margin-right: 30px;
+    width: 150px; /* Medium size */
+    height: 150px; /* Medium size */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+}
+
+.about-text h1 {
+    font-size: 2.5rem; /* Increased font size */
+    margin: 0 0 15px;
+}
+
+.about-text p {
+    font-size: 1.2rem; /* Increased font size */
+    line-height: 1.8;
+}
+
+.highlight {
+    background-color: #eaf2f8;
+    border-left: 5px solid #0044cc;
+    padding: 30px; /* Increased padding */
+    margin: 30px 0; /* Increased margin */
+    border-radius: 10px;
+}
+
+.highlight h2 {
+    margin-top: 0;
+    font-size: 2rem; /* Increased font size */
+}
+
+.highlight ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.highlight ul li {
+    margin: 10px 0; /* Increased margin */
+}
+
+.highlight a {
+    color: #0044cc;
+    text-decoration: none;
+}
+
+.highlight a:hover {
+    text-decoration: underline;
+}
+
+/* Skills and Projects Section */
+.skills-projects-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    gap: 20px; /* Space between columns */
+}
+
+.skills, .projects {
+    flex: 1; /* Take up equal space */
+    background-color: #eaf2f8;
+    border-left: 5px solid #0044cc;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.skills {
+    margin-right: 10px; /* Space between skills and projects */
+}
+
+.skills h2, .projects h2 {
+    margin-top: 0;
+    font-size: 2rem; /* Increased font size */
+}
+
+.skills ul, .projects ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.skills ul li, .projects ul li {
+    margin: 10px 0; /* Increased margin */
+}
+
+.skills a, .projects a {
+    color: #0044cc;
+    text-decoration: none;
+}
+
+.skills a:hover, .projects a:hover {
+    text-decoration: underline;
+}
+
+/* Contact Me Section Styles */
+.contact-me {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.contact-me p {
+    margin: 20px 0; /* Increased margin */
+    font-size: 1.2rem; /* Increased font size */
+}
+
+.contact-me ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contact-me ul li {
+    margin: 15px 0; /* Increased margin */
+}
+
+.contact-me a {
+    color: #0044cc;
+    text-decoration: none;
+}
+
+.contact-me a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar .nav-links a {
+        margin-bottom: 10px;
+    }
+
+    .info-box {
+        padding: 30px; /* Adjusted padding for smaller screens */
+        width: 100%;
+    }
+
+    .about-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .about-image {
+        margin-right: 0;
+        margin-bottom: 20px;
+        width: 40px; /* Increased size */
+        height: 40px; /* Increased size */
+    }
+
+    .skills-projects-container {
+        flex-direction: column;
+    }
+}
+
+img {
+    -webkit-user-drag: none; /* Chrome, Safari */
+    -moz-user-drag: none; /* Firefox */
+    -ms-user-drag: none; /* Internet Explorer */
+}
