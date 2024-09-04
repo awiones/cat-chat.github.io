@@ -4,7 +4,7 @@
 </div>
 <p align="center">
   <a href=""><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
-  <a href="cat-chat.infinityfreeapp.com"><img src="https://img.shields.io/badge/DemoWebsite-here-svg?style=flat"></a>
+  <a href="http://cat-chat.infinityfreeapp.com/"><img src="https://img.shields.io/badge/DemoWebsite-here-svg?style=flat"></a>
 </p>
 
 
