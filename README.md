@@ -43,9 +43,14 @@ Welcome to CatChat! This website is designed to provide a fun and interactive ch
   
 ## Screenshots
 
-### Main Page
-![Main Page Screenshot](./main.PNG)
-![Chat Screenshot](./preview.PNG)
+
+<div style="width: 100%; max-width: 600px; margin: auto;">
+  <img src="](./main.PNG" alt="Main Page Screenshot" style="width: 100%; height: auto; display: block;">
+</div>
+
+<div style="width: 100%; max-width: 600px; margin: auto;">
+  <img src="./preview.PNG" alt="About Me Page Screenshot" style="width: 100%; height: auto; display: block;">
+</div>
 
 
 ## Technologies Used
