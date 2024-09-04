@@ -44,7 +44,8 @@ Welcome to CatChat! This website is designed to provide a fun and interactive ch
 ## Screenshots
 
 ### Main Page
-![Main Page Screenshot](images/screenshot-main-page.png)
+![Main Page Screenshot](./main.PNG)
+![Chat Screenshot](./preview.PNG)
 
 
 ## Technologies Used
