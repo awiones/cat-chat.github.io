@@ -45,7 +45,7 @@ Welcome to CatChat! This website is designed to provide a fun and interactive ch
 
 
 <div style="width: 100%; max-width: 600px; margin: auto;">
-  <img src="](./main.PNG" alt="Main Page Screenshot" style="width: 100%; height: auto; display: block;">
+  <img src="./main.PNG" alt="Main Page Screenshot" style="width: 100%; height: auto; display: block;">
 </div>
 
 <div style="width: 100%; max-width: 600px; margin: auto;">
