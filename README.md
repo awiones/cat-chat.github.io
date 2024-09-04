@@ -40,6 +40,12 @@ Welcome to CatChat! This website is designed to provide a fun and interactive ch
 
 3. **Main Page Interaction**
    - View the introductory information and explore the features of CatChat.
+  
+## Screenshots
+
+### Main Page
+![Main Page Screenshot](images/screenshot-main-page.png)
+
 
 ## Technologies Used
 
