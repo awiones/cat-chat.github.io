@@ -1,6 +1,6 @@
 <div align="center">
   <br>
-  <img src="https://imgur.com/AVp6qJx" alt="catchat" width="400px;">
+  <img src="https://i.imgur.com/AVp6qJx.png" alt="catchat" width="400px;">
 </div>
 <p align="center">
   <a href=""><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
