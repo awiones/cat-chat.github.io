@@ -1,3 +1,13 @@
+div align="center">
+  <br>
+  <img src="https://github.com/awiones/Cat-Chat-Application/blob/main/img/logo-icon.png" alt="catchat" width="400px;">
+</div>
+<p align="center">
+  <a href=""><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
+</p>
+
+
+
 # CatChat Website
 
 Welcome to CatChat! This website is designed to provide a fun and interactive chatting experience with a virtual cat manager. Below you'll find details about the features and functionalities of the website.
