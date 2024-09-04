@@ -60,6 +60,12 @@ Welcome to CatChat! This website is designed to provide a fun and interactive ch
 - **JavaScript**: Dynamic functionalities and interactions.
 - **Local Storage**: For storing chat history.
 
+## Future Plans
+
+- Improve chat responses and add more interactive elements.
+- Enhance the About Me page with additional content and design improvements.
+- Add more features and refine the user interface based on feedback.
+
 ## Contributing
 
 Contributions are welcome! If you have suggestions, improvements, or bug fixes, please submit a pull request or open an issue.
