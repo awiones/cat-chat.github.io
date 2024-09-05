@@ -35,8 +35,8 @@ Welcome to CatChat! This website is designed to provide a fun and interactive ch
 1. **Chat Interaction**
    - Click on the chat icon to open the chat box.
    - Type your message and hit "Send" or press Enter to communicate with the Cat Manager.
-   - 
-1. **Retail Minigame 🛒**
+
+2. **Retail Minigame 🛒**
    - Introducing a fun retail-themed minigame where you manage a cat store and handle customer requests.
    - Engage in decision-making scenarios like "Give," "Don't Give," "Give and Exchange," or "Give and Go" based on customer payments.
    - Earn reputation and currency as you make the right choices.
