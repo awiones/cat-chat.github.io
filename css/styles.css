@@ -1,5 +1,13 @@
 /* made with <3 by awiones */
 
+:root {
+    --tail-width: 10px; /* Tail width */
+    --tail-height: 10px; /* Tail height */
+    --tail-offset-x: -10px; /* X-offset for tail position */
+    --tail-offset-y: -5px; /* Y-offset for tail position */
+}
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -249,6 +257,18 @@ body, .text-manager, .info-box, h1, p, ul, li {
     z-index: 1000; 
 }
 
+.chat-icon-alert {
+    animation: shake 0.5s; /* Example animation */
+    color: red;
+    font-size: 28px;
+}
+
+@keyframes shake {
+    0% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
 .chat-icon:hover {
     transform: scale(1.1);
 }
@@ -360,6 +380,70 @@ body, .text-manager, .info-box, h1, p, ul, li {
 .message.clicked {
     background-color: #e0e0e0; /* Light gray background on click */
     transform: scale(1.05); /* Slightly enlarge the message */
+}
+
+.message-container {
+    position: relative; 
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.message-container.user {
+    text-align: right;
+}
+
+.message-container.cat {
+    text-align: left;
+}
+
+.message-name {
+    font-weight: bold;
+}
+
+.message-text {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background-color: #e9ecef;
+    position: relative; 
+    max-width: 100%; 
+    word-wrap: break-word; 
+
+}
+
+/* User message styles */
+.message-container.user .message-text {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Cat message styles */
+.message-container.cat .message-text {
+    background-color: #e2e2e2;
+    color: #333;
+}
+
+/* User message styles */
+.message-container.user .message-text {
+    background-color: #007bff;
+    color: #fff;
+    text-align: right;
+}
+
+/* Cat message styles */
+.message-container.cat .message-text {
+    background-color: #e2e2e2;
+    color: #333;
+    text-align: left;
+    max-width: 98%; 
+}
+
+/* Input container styles */
+.input-container {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background-color: #fff;
 }
 
 /* Typing animation */
@@ -691,4 +775,494 @@ img {
     -webkit-user-drag: none; /* Chrome, Safari */
     -moz-user-drag: none; /* Firefox */
     -ms-user-drag: none; /* Internet Explorer */
+}
+
+@media (max-width: 600px) {
+    .chat-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .chat-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .profile-section {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    .profile-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto 10px auto;
+        display: block;
+    }
+
+    .cat-manager {
+        display: block;
+        text-align: center;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+    .chat-log {
+        padding: 10px;
+        background-color: #f8f9fa;
+        border-top: 1px solid #ddd;
+        overflow-y: scroll;
+        flex: 1;
+    }
+
+    .message-container {
+        margin-bottom: 15px;
+    }
+
+    .message-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .message-text {
+        padding: 8px 12px;
+        border-radius: 10px;
+        background-color: #e9ecef;
+    }
+
+    .input-container {
+        padding: 10px;
+        border-top: 1px solid #ddd;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+    }
+
+    textarea {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+
+/* GAME RETAIL*/
+
+/* Styles for retail game */
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    max-width: 840px; /* Adjust the max-width as needed */
+    margin: 20px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.game-box h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.game-box p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.game-box .item-info {
+    margin-bottom: 20px;
+}
+
+.game-box .notification {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff9800;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: none; /* Hide by default */
+}
+
+.game-box .notification.hidden {
+    display: none;
+}
+
+.game-box input[type="text"] {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.game-box .feedback {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.game-box .feedback.green {
+    color: green;
+}
+
+.game-box .feedback.red {
+    color: red;
+}
+
+.game-box .feedback.orange {
+    color: orange;
+}
+
+.item-info {
+    margin-bottom: 20px; /* Add some space below the item info */
+}
+
+.game-image {
+    text-align: center; /* Center the image horizontally */
+    margin: 20px 0; /* Add space above and below the image */
+}
+
+#user-input {
+    margin-top: auto; /* Push the input box to the bottom of the game box */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.feedback {
+    margin-top: 10px; /* Add some space above the feedback area */
+    color: #333;
+    font-size: 16px;
+}
+
+.green-text {
+    color: green;
+}
+
+.separator {
+    width: 100%; /* Full width of the reputation bar container */
+    height: 2px; /* Thickness of the separator line */
+    background-color: #333; /* Color of the separator line */
+    margin: 10px 0; /* Margin above and below the line */
+}
+
+/* Reputation */
+
+.reputation-and-currency-container {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    margin-right: 20px;
+}
+
+.currency-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    margin-left: 20px;
+    gap: 8px;
+}
+
+/* Coin logo styling */
+.coin-logo {
+    width: 40px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 5px; /* Space between logo and text */
+}
+
+/* Currency text styling */
+.currency-text {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.currency-amount {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.currency-squeeze {
+    transform: scale(1.1);
+}
+
+.currency-change {
+    position: absolute;
+    top: 30px; /* Adjust based on the distance you want */
+    left: 84px;
+    font-size: 1.0em;
+    color: green;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.currency-change.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.currency-change.fade-out {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.reputation-bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align to the left */
+    margin-right: 450px;
+    position: relative;
+}
+
+.reputation-bar {
+    width: 200px; /* Set the width of the bar */
+    height: 30px; /* Increase height for a more prominent look */
+    background-color: #ddd;
+    border: 2px solid #333;
+    border-radius: 15px; /* Rounded corners for a polished look */
+    position: relative;
+    overflow: hidden;
+}
+
+.reputation-bar-fill {
+    height: 100%;
+    background-color: green;
+    position: absolute;
+    left: 0;
+    transition: width 0.5s ease-in-out; /* Animate width change */
+    border-radius: 15px; /* Match border-radius with bar */
+}
+
+.reputation-text {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+
+
+/* User Manual Button */
+.manual-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.manual-btn:hover {
+    background-color: #0056b3;
+}
+
+/* User Manual Modal */
+.manual-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
+}
+
+.manual-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px; /* Position button on the left side */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 1001; /* Ensure the button is above other content */
+}
+
+.manual-btn:hover {
+    background-color: #0056b3;
+}
+
+/* User Manual Modal */
+.manual-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px; /* Position button on the left side */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 1001; /* Ensure the button is above other content */
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+}
+
+.manual-btn i {
+    font-size: 20px; /* Icon size */
+}
+
+.manual-btn:hover {
+    background-color: #0056b3;
+}
+
+/* User Manual Modal */
+.manual-btn {
+    position: absolute;
+    bottom: 20px; /* Position button at the bottom */
+    left: 20px; /* Position button on the left side */
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px; /* Adjust icon size */
+    z-index: 1001; /* Ensure the button is above other content */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the icon */
+}
+
+.manual-btn i {
+    font-size: 24px; /* Icon size */
+}
+
+.manual-btn:hover {
+    background-color: #0056b3;
+}
+
+/* User Manual Modal */
+.manual-btn {
+    position: absolute;
+    bottom: 20px; /* Position button at the bottom */
+    left: 20px; /* Position button on the left side */
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px; /* Adjust icon size */
+    z-index: 1001; /* Ensure the button is above other content */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the icon */
+}
+
+.manual-btn i {
+    font-size: 24px; /* Icon size */
+}
+
+.manual-btn:hover {
+    background-color: #0056b3;
+}
+
+/* User Manual Modal */
+.manual-btn {
+    position: absolute;
+    top: -17px;
+    left: -17px; /* Position button on the left side */
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px; /* Adjust icon size */
+    z-index: 1001; /* Ensure the button is above other content */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center the icon */
+}
+
+.manual-btn i {
+    font-size: 24px; /* Icon size */
+}
+
+.manual-btn:hover {
+    background-color: #0056b3;
+}
+
+/* User Manual Modal */
+.manual-modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
+}
+
+/* Modal Content */
+.manual-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+/* Close Button */
+.close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Disable scrolling */
+    background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    text-align: center;
 }

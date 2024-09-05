@@ -1,6 +1,3 @@
-// made with <3 by awiones
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const chatIcon = document.getElementById("chat-icon");
     let chatContainer;
@@ -9,16 +6,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Define an array of possible cat responses
     const catResponses = [
-        "Cat: Meow",
-        "Cat: Meow meow",
-        "Cat: Purr",
-        "Cat: Hiss",
-        "Cat: Yawn",
-        "Cat: Stretch",
-        "Cat: Mew",
-        "Cat: Purr meow",
-        "Cat: Hiss meow",
-        "Cat: Meow? Meow!"
+        "Meow",
+        "Meow meow",
+        "Purr",
+        "Hiss",
+        "*Yawn*",
+        "*Stretch*",
+        "Mew",
+        "Purr meow",
+        "Hiss meow",
+        "Meow? Meow!",
+        "Meow.... meow meow?, mew... mew, Mewo... me- Hiss..."
     ];
 
     // Load chat history when the page loads
@@ -106,8 +104,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 const userMessage = textarea.value.trim();
                 if (userMessage) {
                     const userMessageElement = document.createElement("div");
-                    userMessageElement.className = "message user";
-                    userMessageElement.textContent = `You: ${userMessage}`;
+                    userMessageElement.className = "message-container user";
+                    userMessageElement.innerHTML = `
+                        <div class="message-name">You</div>
+                        <div class="message-text">${userMessage}</div>`;
                     chatLog.appendChild(userMessageElement);
 
                     textarea.value = ""; // Clear the textarea after sending the message
@@ -133,10 +133,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                             // Create the cat's response element
                             const catResponseElement = document.createElement("div");
-                            catResponseElement.className = "message cat";
+                            catResponseElement.className = "message-container cat";
                             // Select a random response from the array
                             const randomResponse = catResponses[Math.floor(Math.random() * catResponses.length)];
-                            catResponseElement.textContent = randomResponse;
+                            catResponseElement.innerHTML = `
+                                <div class="message-name">Cat</div>
+                                <div class="message-text">${randomResponse}</div>`;
                             chatLog.appendChild(catResponseElement);
 
                             autoScroll(); // Ensure scrolling to the bottom
