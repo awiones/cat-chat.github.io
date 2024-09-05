@@ -64,7 +64,7 @@ Welcome to CatChat! This website is designed to provide a fun and interactive ch
 ## Future Plans
 
 - Improve chat responses and add more interactive elements.
-- Enhance the About Me page with additional content and design improvements.
+- A cool minigame (2d supposed)
 - Add more features and refine the user interface based on feedback.
 
 ## Contributing
