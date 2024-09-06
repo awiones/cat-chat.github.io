@@ -853,397 +853,7 @@ img {
     }
 }
 
-/* GAME RETAIL*/
 
-/* Styles for retail game */
-.game-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    max-width: 840px; /* Adjust the max-width as needed */
-    margin: 20px auto;
-    background-color: #ffffff;
-    border-radius: 10px;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.game-box h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.game-box p {
-    font-size: 18px;
-    margin-bottom: 20px;
-}
-
-.game-box .item-info {
-    margin-bottom: 20px;
-}
-
-.game-box .notification {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: #ff9800;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    display: none; /* Hide by default */
-}
-
-.game-box .notification.hidden {
-    display: none;
-}
-
-.game-box input[type="text"] {
-    width: calc(100% - 20px); /* Full width minus padding */
-    padding: 10px;
-    font-size: 16px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.game-box .feedback {
-    font-size: 18px;
-    margin-top: 10px;
-}
-
-.game-box .feedback.green {
-    color: green;
-}
-
-.game-box .feedback.red {
-    color: red;
-}
-
-.game-box .feedback.orange {
-    color: orange;
-}
-
-.item-info {
-    margin-bottom: 20px; /* Add some space below the item info */
-}
-
-.game-image {
-    text-align: center; /* Center the image horizontally */
-    margin: 20px 0; /* Add space above and below the image */
-}
-
-#user-input {
-    margin-top: auto; /* Push the input box to the bottom of the game box */
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.feedback {
-    margin-top: 10px; /* Add some space above the feedback area */
-    color: #333;
-    font-size: 16px;
-}
-
-.green-text {
-    color: green;
-}
-
-.separator {
-    width: 100%; /* Full width of the reputation bar container */
-    height: 2px; /* Thickness of the separator line */
-    background-color: #333; /* Color of the separator line */
-    margin: 10px 0; /* Margin above and below the line */
-}
-
-/* Reputation */
-
-.reputation-and-currency-container {
-    display: flex;
-    align-items: center; /* Center items vertically */
-    margin-right: 20px;
-}
-
-.currency-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    margin-left: 20px;
-    gap: 8px;
-}
-
-/* Coin logo styling */
-.coin-logo {
-    width: 40px; /* Adjust size as needed */
-    height: auto;
-    margin-bottom: 5px; /* Space between logo and text */
-}
-
-/* Currency text styling */
-.currency-text {
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.currency-amount {
-    display: inline-block;
-    transition: transform 0.2s ease;
-}
-
-.currency-squeeze {
-    transform: scale(1.1);
-}
-
-.currency-change {
-    position: absolute;
-    top: 30px; /* Adjust based on the distance you want */
-    left: 84px;
-    font-size: 1.0em;
-    color: green;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    opacity: 0;
-    transform: translateY(-10px);
-}
-
-.currency-change.fade-in {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.currency-change.fade-out {
-    opacity: 0;
-    transform: translateY(-20px);
-}
-
-.reputation-bar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align to the left */
-    margin-right: 450px;
-    position: relative;
-}
-
-.reputation-bar {
-    width: 200px; /* Set the width of the bar */
-    height: 30px; /* Increase height for a more prominent look */
-    background-color: #ddd;
-    border: 2px solid #333;
-    border-radius: 15px; /* Rounded corners for a polished look */
-    position: relative;
-    overflow: hidden;
-}
-
-.reputation-bar-fill {
-    height: 100%;
-    background-color: green;
-    position: absolute;
-    left: 0;
-    transition: width 0.5s ease-in-out; /* Animate width change */
-    border-radius: 15px; /* Match border-radius with bar */
-}
-
-.reputation-text {
-    margin-top: 10px;
-    font-size: 16px;
-}
-
-
-
-/* User Manual Button */
-.manual-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.manual-btn:hover {
-    background-color: #0056b3;
-}
-
-/* User Manual Modal */
-.manual-modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
-}
-
-.manual-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px; /* Position button on the left side */
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    z-index: 1001; /* Ensure the button is above other content */
-}
-
-.manual-btn:hover {
-    background-color: #0056b3;
-}
-
-/* User Manual Modal */
-.manual-btn {
-    position: fixed;
-    top: 20px;
-    left: 20px; /* Position button on the left side */
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    z-index: 1001; /* Ensure the button is above other content */
-    display: flex;
-    align-items: center;
-    gap: 8px; /* Space between icon and text */
-}
-
-.manual-btn i {
-    font-size: 20px; /* Icon size */
-}
-
-.manual-btn:hover {
-    background-color: #0056b3;
-}
-
-/* User Manual Modal */
-.manual-btn {
-    position: absolute;
-    bottom: 20px; /* Position button at the bottom */
-    left: 20px; /* Position button on the left side */
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 24px; /* Adjust icon size */
-    z-index: 1001; /* Ensure the button is above other content */
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center the icon */
-}
-
-.manual-btn i {
-    font-size: 24px; /* Icon size */
-}
-
-.manual-btn:hover {
-    background-color: #0056b3;
-}
-
-/* User Manual Modal */
-.manual-btn {
-    position: absolute;
-    bottom: 20px; /* Position button at the bottom */
-    left: 20px; /* Position button on the left side */
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 24px; /* Adjust icon size */
-    z-index: 1001; /* Ensure the button is above other content */
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center the icon */
-}
-
-.manual-btn i {
-    font-size: 24px; /* Icon size */
-}
-
-.manual-btn:hover {
-    background-color: #0056b3;
-}
-
-/* User Manual Modal */
-.manual-btn {
-    position: absolute;
-    top: -17px;
-    left: -17px; /* Position button on the left side */
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 24px; /* Adjust icon size */
-    z-index: 1001; /* Ensure the button is above other content */
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center the icon */
-}
-
-.manual-btn i {
-    font-size: 24px; /* Icon size */
-}
-
-.manual-btn:hover {
-    background-color: #0056b3;
-}
-
-/* User Manual Modal */
-.manual-modal {
-    display: none; /* Hidden by default */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
-}
-
-/* Modal Content */
-.manual-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 10px;
-}
-
-/* Close Button */
-.close-btn {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close-btn:hover,
-.close-btn:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
 
 /* Modal styles */
 .modal {
@@ -1265,4 +875,104 @@ img {
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
     text-align: center;
+}
+
+main.best-worker-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Adjust as needed */
+    padding: 20px;
+    overflow: hidden;
+}
+
+.best-worker-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.best-worker-box {
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 30px;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0; 
+    transform: translateY(100px); 
+    animation: swipe-up 1s forwards; 
+    margin-top: 50px; 
+}
+
+.best-worker-box h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.best-worker-box h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.best-worker-box p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.worker-details {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.worker-details p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #444;
+}
+
+.cat-image {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 50%;
+}
+
+.additional-cats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    width: 100%; /* Make sure the container is full width */
+    gap: 20px;
+}
+
+.cat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+}
+
+.cat p {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #333;
+    text-align: center; /* Center the text */
+}
+
+@keyframes swipe-up {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
