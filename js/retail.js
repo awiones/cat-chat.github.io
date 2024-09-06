@@ -1,179 +1,145 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const items = [
-        { name: "Cat Toy", price: 10 },
-        { name: "Cat Bed", price: 25 },
-        { name: "Cat Food", price: 15 },
-        { name: "Cat Scratcher", price: 20 },
-        { name: "Cat Collar", price: 5 },
-        { name: "Cat Tree", price: 50 },
-        { name: "Cat Litter", price: 10 },
-        { name: "Cat Carrier", price: 30 }
-    ];
-
-    const itemNameElement = document.getElementById("item-name");
-    const itemPriceElement = document.getElementById("item-price");
-    const customerPaymentElement = document.getElementById("customer-payment");
-    const userInput = document.getElementById("user-input");
-    const feedbackElement = document.getElementById("feedback");
-    const notification = document.getElementById("notification");
-    const reputationBarFill = document.querySelector(".reputation-bar-fill");
-    const reputationText = document.getElementById("reputation-text");
-    const currencyAmount = document.getElementById("currency-amount");
-
-    // User Manual Elements
-    const manualBtn = document.getElementById("manual-btn");
-    const manualModal = document.getElementById("manual-modal");
-    const closeManual = document.getElementById("close-manual");
-
-    let reputation = 100; // Starting reputation
-    let currency = 0; // Starting currency
-    let currentItem = null; // Track current item details
-    let currentCustomerPayment = 0; // Track current customer payment
-    let inputLocked = false; // To track if input is locked
-
-    function getRandomItem() {
-        const randomIndex = Math.floor(Math.random() * items.length);
-        return items[randomIndex];
-    }
-
-    function updateRequest() {
-        const item = getRandomItem();
-        const customerPayment = Math.floor(Math.random() * (item.price + 50)) + item.price; // Willing to pay between item price and item price + 50
-
-        itemNameElement.textContent = item.name;
-        itemPriceElement.textContent = item.price;
-        customerPaymentElement.textContent = customerPayment;
-        currentItem = item;
-        currentCustomerPayment = customerPayment;
-        notification.classList.remove("hidden");
-        setTimeout(() => notification.classList.add("hidden"), 3000); // Hide notification after 3 seconds
-    }
-
-    function updateReputation(newReputation) {
-        reputation = Math.min(Math.max(newReputation, 0), 500); // Clamp reputation between 0 and 500
-        const reputationPercent = (reputation / 500) * 100; // Calculate percentage for the bar
-        reputationText.textContent = `Reputation: ${reputation}`;
-        reputationBarFill.style.width = `${reputationPercent}%`; // Update width to reflect reputation
-    }
-
-    function updateCurrency(amount) {
-        const oldCurrency = currency;
-        currency += amount;
-        currencyAmount.textContent = currency;
-
-        // Animate currency amount change
-        const amountDisplay = document.createElement("span");
-        amountDisplay.textContent = `+${amount}`;
-        amountDisplay.className = "currency-change";
-        currencyAmount.parentElement.appendChild(amountDisplay); // Append above the currency amount
-
-        setTimeout(() => {
-            amountDisplay.classList.add("fade-in");
-        }, 10); // Small delay to ensure the element is added before animating
-
-        // Remove the element after animation
-        setTimeout(() => {
-            amountDisplay.classList.remove("fade-in");
-            amountDisplay.classList.add("fade-out");
-            setTimeout(() => amountDisplay.remove(), 500); // Remove element after fade-out
-        }, 2000); // Duration of the fade-in effect
-    }
-
-    function handleUserInput(input) {
-        if (inputLocked) return; // Prevent input handling if locked
-
-        inputLocked = true; // Lock the input field
-
-        const lowerCaseInput = input.toLowerCase().trim(); // Convert input to lowercase and trim whitespace
-
-        if (currentItem === null) {
-            feedbackElement.textContent = `No request available. Please wait for a new item request.`;
-            feedbackElement.style.color = "orange";
-            resetInputLock();
-            return;
+const config = {
+    type: Phaser.AUTO,
+    width: 800,
+    height: 600,
+    backgroundColor: '#f0f0f0',
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 0 },
+            debug: false
         }
+    },
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
 
-        const itemPrice = currentItem.price;
-        const customerPayment = currentCustomerPayment;
-        const change = customerPayment - itemPrice;
+let game = new Phaser.Game(config);
 
-        if (lowerCaseInput === "give") {
-            if (change > 0) {
-                feedbackElement.textContent = `You gave the item for ${itemPrice} PawMoney and gave exchange of ${change} PawMoney.`;
-                feedbackElement.style.color = "green";
-            } else {
-                feedbackElement.textContent = `You gave the item for ${itemPrice} PawMoney. No exchange needed.`;
-                feedbackElement.style.color = "green";
-            }
-            updateReputation(reputation + 5); // Increase reputation for "Give" option
-            updateCurrency(itemPrice); // Increase currency for "Give" option
-            updateRequest(); // Request a new item after handling input
-        } else if (lowerCaseInput === "don't give" || lowerCaseInput === "dont give" || lowerCaseInput === "dont" || lowerCaseInput === "don't") {
-            feedbackElement.textContent = `You did not give the item.`;
-            feedbackElement.style.color = "red";
-            updateReputation(reputation - 10); // Decrease reputation for "Don't Give" option
-            updateRequest(); // Request a new item after handling input
-        } else if (lowerCaseInput === "give and exchange") {
-            if (change > 0) {
-                feedbackElement.textContent = `You gave the item for ${itemPrice} PawMoney and gave exchange of ${change} PawMoney.`;
-                feedbackElement.style.color = "green";
-            } else {
-                feedbackElement.textContent = `You gave the item for ${itemPrice} PawMoney. No exchange needed.`;
-                feedbackElement.style.color = "green";
-            }
-            updateReputation(reputation + 5); // Increase reputation for "Give and Exchange" option
-            updateCurrency(itemPrice); // Increase currency for "Give and Exchange" option
-            updateRequest(); // Request a new item after handling input
-        } else if (lowerCaseInput === "give and go") {
-            feedbackElement.textContent = `You gave the item for ${itemPrice} PawMoney and received ${customerPayment} PawMoney.`;
-            feedbackElement.style.color = "green";
-            updateReputation(reputation - 10); // Decrease reputation for "Give and Go" option
-            updateCurrency(customerPayment); // Increase currency by the full customer payment
-            updateRequest(); // Request a new item after handling input
-        } else {
-            feedbackElement.textContent = `Invalid input. Please type 'Give', 'Don't Give', 'Give and Exchange', or 'Give and Go'.`;
-            feedbackElement.style.color = "orange";
+let cats = [];
+let currentCat = null;
+let scannedItems = [];
+let totalCost = 0;
+let moneyGiven = 0;
+let itemText, totalCostText, moneyGivenText, changeText;
+
+function preload() {
+    // Load assets like cat sprites, item sprites, and any UI elements.
+    this.load.image('cat', 'path/to/cat.png'); // Placeholder for cat image
+    this.load.image('item', 'path/to/item.png'); // Placeholder for item image
+}
+
+function create() {
+    // Create a few cats that will approach the cashier
+    for (let i = 0; i < 3; i++) {
+        let cat = this.add.sprite(100 + i * 150, 100, 'cat');
+        cats.push({ sprite: cat, items: generateItems() });
+    }
+
+    // UI texts to show the total, money given, and change
+    itemText = this.add.text(20, 20, 'Items:', { fontSize: '20px', fill: '#000' });
+    totalCostText = this.add.text(20, 50, 'Total Cost: PawMoney 0', { fontSize: '20px', fill: '#000' });
+    moneyGivenText = this.add.text(20, 80, 'Money Given: PawMoney 0', { fontSize: '20px', fill: '#000' });
+    changeText = this.add.text(20, 110, 'Change: PawMoney 0', { fontSize: '20px', fill: '#000' });
+
+    // Listen for item scan (this could be a click or hover)
+    this.input.on('pointerdown', scanItem, this);
+
+    // Add number buttons to enter PawMoney for payment and change
+    createNumberButtons(this);
+}
+
+function update() {
+    // Move the current cat towards the cashier
+    if (currentCat) {
+        currentCat.sprite.x += 1;
+        if (currentCat.sprite.x >= 600) {
+            // Cat has arrived at the cashier
+            showItems(currentCat.items);
         }
+    } else if (cats.length > 0) {
+        // Move the next cat to the cashier
+        currentCat = cats.shift();
+    }
+}
 
-        userInput.value = ''; // Clear the input field
+function generateItems() {
+    // Create random items with prices
+    let items = [];
+    for (let i = 0; i < 3; i++) {
+        items.push({ sprite: 'item', price: Phaser.Math.Between(1, 10) });
+    }
+    return items;
+}
 
-        // Reset input lock after 2 seconds
-        setTimeout(() => {
-            inputLocked = false;
-        }, 2000);
+function showItems(items) {
+    // Display the cat's items on the screen
+    let itemList = 'Items: ';
+    totalCost = 0;
+    items.forEach(item => {
+        itemList += `Item (${item.price} PawMoney), `;
+        totalCost += item.price;
+    });
+    itemText.setText(itemList);
+    totalCostText.setText(`Total Cost: PawMoney ${totalCost}`);
+}
+
+function scanItem() {
+    // Simulate scanning an item when clicked (could be expanded with more logic)
+    if (currentCat) {
+        scannedItems = currentCat.items;
+        showItems(scannedItems);
+    }
+}
+
+function createNumberButtons(scene) {
+    let startX = 600;
+    let startY = 400;
+    let buttonSize = 50;
+
+    for (let i = 0; i < 10; i++) {
+        let button = scene.add.text(startX + (i % 3) * buttonSize, startY + Math.floor(i / 3) * buttonSize, i, {
+            fontSize: '32px',
+            fill: '#000',
+            backgroundColor: '#ddd'
+        }).setInteractive();
+
+        button.on('pointerdown', function () {
+            enterMoney(i);
+        });
     }
 
-    function resetInputLock() {
-        // Reset input lock immediately
-        inputLocked = false;
-    }
+    let enterButton = scene.add.text(startX, startY + 4 * buttonSize, 'Enter', {
+        fontSize: '32px',
+        fill: '#fff',
+        backgroundColor: '#00f'
+    }).setInteractive();
+
+    enterButton.on('pointerdown', finalizeTransaction);
+}
+
+function enterMoney(amount) {
+    // Append the entered amount to the money given by the player
+    moneyGiven = moneyGiven * 10 + amount;
+    moneyGivenText.setText(`Money Given: PawMoney ${moneyGiven}`);
+}
+
+function finalizeTransaction() {
+    // Calculate change and show it
+    let change = moneyGiven - totalCost;
+    changeText.setText(`Change: PawMoney ${change}`);
     
+    // Reset for next cat
+    moneyGiven = 0;
+    totalCost = 0;
+    scannedItems = [];
+    currentCat = null;
 
-    // Manual Modal Functionality
-    manualBtn.addEventListener("click", function() {
-        manualModal.style.display = "block";
-    });
-
-    closeManual.addEventListener("click", function() {
-        manualModal.style.display = "none";
-    });
-
-    window.addEventListener("click", function(event) {
-        if (event.target === manualModal) {
-            manualModal.style.display = "none";
-        }
-    });
-
-    userInput.addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-            handleUserInput(userInput.value);
-        }
-    });
-
-    
-
-    // Initialize with a random item request and update reputation bar and currency
-    updateRequest();
-    updateReputation(reputation);
-    updateCurrency(currency);
-});
+    moneyGivenText.setText('Money Given: PawMoney 0');
+    totalCostText.setText('Total Cost: PawMoney 0');
+    changeText.setText('Change: PawMoney 0');
+    itemText.setText('Items: ');
+}

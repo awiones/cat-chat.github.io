@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+    <script defer src="js/retail.js"></script>
 </head>
 <body>
     <header>
@@ -23,6 +24,50 @@
         </nav>
     </header>
 
+    <div class="game-container">
+        <div class="header">
+            <h1>Cat Grocery - PawMoney</h1>
+            <p>Scan the cat's items and manage the money!</p>
+        </div>
+
+        <!-- Game Canvas -->
+        <div id="gameCanvas"></div>
+
+        <!-- Game Controls and Info -->
+        <div class="game-info">
+            <div class="info-box">
+                <h2>Current Transaction</h2>
+                <div id="itemList">Items: N/A</div>
+                <div id="totalCost">Total Cost: PawMoney 0</div>
+                <div id="moneyGiven">Money Given: PawMoney 0</div>
+                <div id="change">Change: PawMoney 0</div>
+            </div>
+
+            <!-- Number Pad for entering money -->
+            <div class="number-pad">
+                <div class="number-row">
+                    <button class="number-btn">1</button>
+                    <button class="number-btn">2</button>
+                    <button class="number-btn">3</button>
+                </div>
+                <div class="number-row">
+                    <button class="number-btn">4</button>
+                    <button class="number-btn">5</button>
+                    <button class="number-btn">6</button>
+                </div>
+                <div class="number-row">
+                    <button class="number-btn">7</button>
+                    <button class="number-btn">8</button>
+                    <button class="number-btn">9</button>
+                </div>
+                <div class="number-row">
+                    <button class="number-btn">0</button>
+                    <button class="action-btn" id="enterBtn">Enter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div id="warning-modal" class="modal">
         <div class="modal-content">
@@ -38,7 +83,6 @@
 
     <script src="js/chat.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/retail.js"></script>
     <script src="js/warning.js"></script>
 </body>
 </html>
