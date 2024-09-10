@@ -6,8 +6,6 @@
     <title>CatChat</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
-    <script defer src="js/retail.js"></script>
 </head>
 <body>
     <header>
@@ -17,57 +15,63 @@
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="Best-Worker.html">Best Worker</a></li>
                 <li><a href="retail.html">Retail</a></li>
                 <li><a href="about-me.html">About Me</a></li>
             </ul>
         </nav>
     </header>
 
-    <div class="game-container">
-        <div class="header">
-            <h1>Cat Grocery - PawMoney</h1>
-            <p>Scan the cat's items and manage the money!</p>
+    <div id="game-container" class="game-container">
+        <button id="manual-btn" class="manual-btn">
+            <i class="fas fa-file-alt"></i>
+        </button>
+
+        <div id="manual-modal" class="manual-modal">
+            <div class="manual-content">
+                <span id="close-manual" class="close-btn">&times;</span>
+                <h2>User Manual</h2>
+                <p>Welcome to the Retail System! Here's a quick guide:</p>
+                <ul>
+                    <li><strong>Give:</strong> Provide the item and give the exchange amount if any.</li>
+                    <li><strong>Don't Give:</strong> Refuse to give the item.</li>
+                    <li><strong>Give and Exchange:</strong> Provide the item and give change if needed.</li>
+                    <li><strong>Give and Go:</strong> Provide the item and receive the full payment from the customer.</li>
+                </ul>
+                <p>Follow the on-screen instructions to interact with the system.</p>
+            </div>
         </div>
 
-        <!-- Game Canvas -->
-        <div id="gameCanvas"></div>
-
-        <!-- Game Controls and Info -->
-        <div class="game-info">
-            <div class="info-box">
-                <h2>Current Transaction</h2>
-                <div id="itemList">Items: N/A</div>
-                <div id="totalCost">Total Cost: PawMoney 0</div>
-                <div id="moneyGiven">Money Given: PawMoney 0</div>
-                <div id="change">Change: PawMoney 0</div>
+        
+        
+        <div class="reputation-and-currency-container">
+            <div class="reputation-bar-container">
+                <div class="reputation-bar">
+                    <div class="reputation-bar-fill"></div>
+                </div>
+                <div id="reputation-text" class="reputation-text">Reputation: 100</div>
             </div>
-
-            <!-- Number Pad for entering money -->
-            <div class="number-pad">
-                <div class="number-row">
-                    <button class="number-btn">1</button>
-                    <button class="number-btn">2</button>
-                    <button class="number-btn">3</button>
-                </div>
-                <div class="number-row">
-                    <button class="number-btn">4</button>
-                    <button class="number-btn">5</button>
-                    <button class="number-btn">6</button>
-                </div>
-                <div class="number-row">
-                    <button class="number-btn">7</button>
-                    <button class="number-btn">8</button>
-                    <button class="number-btn">9</button>
-                </div>
-                <div class="number-row">
-                    <button class="number-btn">0</button>
-                    <button class="action-btn" id="enterBtn">Enter</button>
+            <div class="currency-container" style="position: relative;">
+                <img src="img/paw-currency.png" alt="Coin Logo" class="coin-logo">
+                <div id="currency-display" class="currency-text">
+                    PawMoney: <span id="currency-amount" class="currency-amount">0</span>
                 </div>
             </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="game-box">
+            <div id="notification" class="notification">Customer is waiting!</div>
+            <div class="item-info">
+                <h2>Customer wants to buy <span id="item-name"></span> that is <span id="item-price" class="green-text"></span> PawMoney, and is willing to pay <span id="customer-payment" class="green-text"></span> PawMoney</h2>
+            </div>
+            <div class="game-image">
+                <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExM29hbnhmYmtxaXdiN3NhMWQ4cm1vNHpkYmQyeGhhYnRreHJidWthOCZlcD12MV9pbnRlbnNsb3FfYnlfaWQmY3Q9Zw/H5mx6uIAAiaru/giphy.webp" alt="Item Image" id="item-image">
+            </div>
+            <input type="text" id="user-input" placeholder="Type 'Give' or 'Don't Give'">
+            <div id="feedback" class="feedback"></div>
         </div>
     </div>
-
 
     <div id="warning-modal" class="modal">
         <div class="modal-content">
@@ -83,6 +87,7 @@
 
     <script src="js/chat.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/retail.js"></script>
     <script src="js/warning.js"></script>
 </body>
 </html>

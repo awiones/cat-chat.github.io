@@ -1,144 +1,179 @@
-const config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 400,
-    parent: 'gameCanvas', // Attach Phaser game to the div with id 'gameCanvas'
-    backgroundColor: '#eaeaea',
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 0 },
-            debug: false
+document.addEventListener("DOMContentLoaded", function() {
+    const items = [
+        { name: "Cat Toy", price: 10 },
+        { name: "Cat Bed", price: 25 },
+        { name: "Cat Food", price: 15 },
+        { name: "Cat Scratcher", price: 20 },
+        { name: "Cat Collar", price: 5 },
+        { name: "Cat Tree", price: 50 },
+        { name: "Cat Litter", price: 10 },
+        { name: "Cat Carrier", price: 30 }
+    ];
+
+    const itemNameElement = document.getElementById("item-name");
+    const itemPriceElement = document.getElementById("item-price");
+    const customerPaymentElement = document.getElementById("customer-payment");
+    const userInput = document.getElementById("user-input");
+    const feedbackElement = document.getElementById("feedback");
+    const notification = document.getElementById("notification");
+    const reputationBarFill = document.querySelector(".reputation-bar-fill");
+    const reputationText = document.getElementById("reputation-text");
+    const currencyAmount = document.getElementById("currency-amount");
+
+    // User Manual Elements
+    const manualBtn = document.getElementById("manual-btn");
+    const manualModal = document.getElementById("manual-modal");
+    const closeManual = document.getElementById("close-manual");
+
+    let reputation = 100; // Starting reputation
+    let currency = 0; // Starting currency
+    let currentItem = null; // Track current item details
+    let currentCustomerPayment = 0; // Track current customer payment
+    let inputLocked = false; // To track if input is locked
+
+    function getRandomItem() {
+        const randomIndex = Math.floor(Math.random() * items.length);
+        return items[randomIndex];
+    }
+
+    function updateRequest() {
+        const item = getRandomItem();
+        const customerPayment = Math.floor(Math.random() * (item.price + 50)) + item.price; // Willing to pay between item price and item price + 50
+
+        itemNameElement.textContent = item.name;
+        itemPriceElement.textContent = item.price;
+        customerPaymentElement.textContent = customerPayment;
+        currentItem = item;
+        currentCustomerPayment = customerPayment;
+        notification.classList.remove("hidden");
+        setTimeout(() => notification.classList.add("hidden"), 3000); // Hide notification after 3 seconds
+    }
+
+    function updateReputation(newReputation) {
+        reputation = Math.min(Math.max(newReputation, 0), 500); // Clamp reputation between 0 and 500
+        const reputationPercent = (reputation / 500) * 100; // Calculate percentage for the bar
+        reputationText.textContent = `Reputation: ${reputation}`;
+        reputationBarFill.style.width = `${reputationPercent}%`; // Update width to reflect reputation
+    }
+
+    function updateCurrency(amount) {
+        const oldCurrency = currency;
+        currency += amount;
+        currencyAmount.textContent = currency;
+
+        // Animate currency amount change
+        const amountDisplay = document.createElement("span");
+        amountDisplay.textContent = `+${amount}`;
+        amountDisplay.className = "currency-change";
+        currencyAmount.parentElement.appendChild(amountDisplay); // Append above the currency amount
+
+        setTimeout(() => {
+            amountDisplay.classList.add("fade-in");
+        }, 10); // Small delay to ensure the element is added before animating
+
+        // Remove the element after animation
+        setTimeout(() => {
+            amountDisplay.classList.remove("fade-in");
+            amountDisplay.classList.add("fade-out");
+            setTimeout(() => amountDisplay.remove(), 500); // Remove element after fade-out
+        }, 2000); // Duration of the fade-in effect
+    }
+
+    function handleUserInput(input) {
+        if (inputLocked) return; // Prevent input handling if locked
+
+        inputLocked = true; // Lock the input field
+
+        const lowerCaseInput = input.toLowerCase().trim(); // Convert input to lowercase and trim whitespace
+
+        if (currentItem === null) {
+            feedbackElement.textContent = `No request available. Please wait for a new item request.`;
+            feedbackElement.style.color = "orange";
+            resetInputLock();
+            return;
         }
-    },
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
-};
 
-let game = new Phaser.Game(config);
+        const itemPrice = currentItem.price;
+        const customerPayment = currentCustomerPayment;
+        const change = customerPayment - itemPrice;
 
-const items = [
-    { name: "Cat Toy", price: 10 },
-    { name: "Cat Bed", price: 25 },
-    { name: "Cat Food", price: 15 },
-    { name: "Cat Scratcher", price: 20 },
-    { name: "Cat Collar", price: 5 },
-    { name: "Cat Tree", price: 50 },
-    { name: "Cat Litter", price: 10 },
-    { name: "Cat Carrier", price: 30 }
-];
-
-let cats = [];
-let currentCat = null;
-let scannedItems = [];
-let totalCost = 0;
-let moneyGiven = 0;
-let itemText, totalCostText, moneyGivenText, changeText;
-
-function preload() {
-    this.load.image('cat', 'img/logo-icon.png'); // Placeholder image path
-}
-
-function create() {
-    // Create a few cats that will approach the cashier
-    for (let i = 0; i < 3; i++) {
-        let cat = this.add.sprite(100 + i * 150, 200, 'cat');
-        cats.push({ sprite: cat, items: generateItems() });
-    }
-
-    // Set up the number buttons for entering money
-    setupNumberButtons();
-
-    // Attach DOM elements for displaying info
-    itemText = document.getElementById('itemList');
-    totalCostText = document.getElementById('totalCost');
-    moneyGivenText = document.getElementById('moneyGiven');
-    changeText = document.getElementById('change');
-
-    // Add click functionality to scan items when the cat reaches the cashier
-    this.input.on('pointerdown', scanItem, this);
-}
-
-function update() {
-    // Move the current cat towards the cashier
-    if (currentCat) {
-        currentCat.sprite.x += 1;
-        if (currentCat.sprite.x >= 600) {
-            // Cat has arrived at the cashier
-            showItems(currentCat.items);
+        if (lowerCaseInput === "give") {
+            if (change > 0) {
+                feedbackElement.textContent = `You gave the item for ${itemPrice} PawMoney and gave exchange of ${change} PawMoney.`;
+                feedbackElement.style.color = "green";
+            } else {
+                feedbackElement.textContent = `You gave the item for ${itemPrice} PawMoney. No exchange needed.`;
+                feedbackElement.style.color = "green";
+            }
+            updateReputation(reputation + 5); // Increase reputation for "Give" option
+            updateCurrency(itemPrice); // Increase currency for "Give" option
+            updateRequest(); // Request a new item after handling input
+        } else if (lowerCaseInput === "don't give" || lowerCaseInput === "dont give" || lowerCaseInput === "dont" || lowerCaseInput === "don't") {
+            feedbackElement.textContent = `You did not give the item.`;
+            feedbackElement.style.color = "red";
+            updateReputation(reputation - 10); // Decrease reputation for "Don't Give" option
+            updateRequest(); // Request a new item after handling input
+        } else if (lowerCaseInput === "give and exchange") {
+            if (change > 0) {
+                feedbackElement.textContent = `You gave the item for ${itemPrice} PawMoney and gave exchange of ${change} PawMoney.`;
+                feedbackElement.style.color = "green";
+            } else {
+                feedbackElement.textContent = `You gave the item for ${itemPrice} PawMoney. No exchange needed.`;
+                feedbackElement.style.color = "green";
+            }
+            updateReputation(reputation + 5); // Increase reputation for "Give and Exchange" option
+            updateCurrency(itemPrice); // Increase currency for "Give and Exchange" option
+            updateRequest(); // Request a new item after handling input
+        } else if (lowerCaseInput === "give and go") {
+            feedbackElement.textContent = `You gave the item for ${itemPrice} PawMoney and received ${customerPayment} PawMoney.`;
+            feedbackElement.style.color = "green";
+            updateReputation(reputation - 10); // Decrease reputation for "Give and Go" option
+            updateCurrency(customerPayment); // Increase currency by the full customer payment
+            updateRequest(); // Request a new item after handling input
+        } else {
+            feedbackElement.textContent = `Invalid input. Please type 'Give', 'Don't Give', 'Give and Exchange', or 'Give and Go'.`;
+            feedbackElement.style.color = "orange";
         }
-    } else if (cats.length > 0) {
-        // Move the next cat to the cashier
-        currentCat = cats.shift();
+
+        userInput.value = ''; // Clear the input field
+
+        // Reset input lock after 2 seconds
+        setTimeout(() => {
+            inputLocked = false;
+        }, 2000);
     }
-}
 
-function generateItems() {
-    // Generate random items from the given list
-    let randomItems = [];
-    let numberOfItems = Phaser.Math.Between(1, 3);
-    for (let i = 0; i < numberOfItems; i++) {
-        let randomItem = items[Phaser.Math.Between(0, items.length - 1)];
-        randomItems.push(randomItem);
+    function resetInputLock() {
+        // Reset input lock immediately
+        inputLocked = false;
     }
-    return randomItems;
-}
+    
 
-function showItems(items) {
-    // Display the items in the UI
-    let itemList = 'Items: ';
-    totalCost = 0;
-    items.forEach(item => {
-        itemList += `${item.name} (PawMoney ${item.price}), `;
-        totalCost += item.price;
-    });
-    itemText.innerText = itemList;
-    totalCostText.innerText = `Total Cost: PawMoney ${totalCost}`;
-}
-
-function scanItem() {
-    // Simulate scanning an item when clicked (currently scans all items)
-    if (currentCat) {
-        scannedItems = currentCat.items;
-        showItems(scannedItems);
-    }
-}
-
-function setupNumberButtons() {
-    let buttons = document.querySelectorAll('.number-btn');
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            let value = parseInt(button.innerText);
-            enterMoney(value);
-        });
+    // Manual Modal Functionality
+    manualBtn.addEventListener("click", function() {
+        manualModal.style.display = "block";
     });
 
-    let enterBtn = document.getElementById('enterBtn');
-    enterBtn.addEventListener('click', finalizeTransaction);
-}
+    closeManual.addEventListener("click", function() {
+        manualModal.style.display = "none";
+    });
 
-function enterMoney(amount) {
-    // Append the entered amount to the money given by the player
-    moneyGiven = moneyGiven * 10 + amount;
-    moneyGivenText.innerText = `Money Given: PawMoney ${moneyGiven}`;
-}
+    window.addEventListener("click", function(event) {
+        if (event.target === manualModal) {
+            manualModal.style.display = "none";
+        }
+    });
 
-function finalizeTransaction() {
-    // Calculate change and show it in the UI
-    let change = moneyGiven - totalCost;
-    changeText.innerText = `Change: PawMoney ${change >= 0 ? change : 'Insufficient'}`;
+    userInput.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            handleUserInput(userInput.value);
+        }
+    });
 
-    // Reset for the next cat
-    moneyGiven = 0;
-    totalCost = 0;
-    scannedItems = [];
-    currentCat = null;
+    
 
-    moneyGivenText.innerText = 'Money Given: PawMoney 0';
-    totalCostText.innerText = 'Total Cost: PawMoney 0';
-    changeText.innerText = 'Change: PawMoney 0';
-    itemText.innerText = 'Items: N/A';
-}
+    // Initialize with a random item request and update reputation bar and currency
+    updateRequest();
+    updateReputation(reputation);
+    updateCurrency(currency);
+});
